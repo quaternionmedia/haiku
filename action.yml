@@ -1,16 +1,18 @@
-name: 'Haiku detection'
-description: 'Detects if an issue contains a haiku'
+name: 🎎 Haiku detection
+description: Detects if an issue contains a haiku
 inputs:
   token:
-    description: 'GitHub token'
+    description: GitHub token
     required: true
+    default: ${{ github.token }}
 runs:
-  using: 'composite'
+  using: composite
   steps:
-    - name: Install dependencies
+    - name: 💾 Install dependencies
       run: npm install syllable
       shell: bash
-    - name: Check for haiku
+    - name: 🔎 Check for haiku
+      shell: node
       run: |
         const issue = context.issue;
         const issueBody = context.payload.issue.body;
@@ -43,4 +45,3 @@ runs:
             issue_number: issue.number,
             labels: ['haiku 🐸']
           });
-      shell: node
