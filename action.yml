@@ -12,5 +12,5 @@ runs:
       run: npm install syllable
       shell: bash
     - name: 👺 Check for haiku
-      run: node haiku.js
+      run: node ./.github/actions/haiku/haiku.js
       shell: bash
