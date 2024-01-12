@@ -1,5 +1,6 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
+import core from '@actions/core';
+import * as github from '@actions/github';
+import syllable from 'syllable';
 
 const token = process.argv[2];
 const octokit = github.getOctokit(token);
@@ -7,7 +8,6 @@ const context = github.context;
 
 const issue = context.issue;
 const issueBody = context.payload.issue.body;
-const syllable = require('syllable');
 
 function countSyllables(line) {
     const words = line.split(' ');
