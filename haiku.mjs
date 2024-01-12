@@ -1,10 +1,9 @@
 import core from '@actions/core';
-import * as github from '@actions/github';
+import { getOctokit, context } from '@actions/github';
 import { syllable } from 'syllable';
 
 const token = process.argv[2];
-const octokit = github.getOctokit(token);
-const context = github.context;
+const octokit = getOctokit(token);
 
 const issue = context.issue;
 const issueBody = context.payload.issue.body;
@@ -30,7 +29,7 @@ function isHaiku(text) {
 }
 
 if (isHaiku(issueBody)) {
-    github.rest.issues.addLabels({
+    octokit.rest.issues.addLabels({
         owner: issue.owner,
         repo: issue.repo,
         issue_number: issue.number,
