@@ -18,6 +18,9 @@ function countSyllables(line) {
 }
 
 function isHaiku(text) {
+    if (typeof text !== 'string') {
+        return false;
+    }
     const lines = text.split('\n');
     for (let i = 0; i <= lines.length - 3; i++) {
         const syllableCounts = lines.slice(i, i + 3).map(line => countSyllables(line));
@@ -29,10 +32,15 @@ function isHaiku(text) {
 }
 
 if (isHaiku(issueBody)) {
-    octokit.rest.issues.addLabels({
-        owner: issue.owner,
-        repo: issue.repo,
-        issue_number: issue.number,
-        labels: ['haiku 🐸']
-    });
+    console.log('Haiku detected!');
+    try {
+        octokit.rest.issues.addLabels({
+            owner: issue.owner,
+            repo: issue.repo,
+            issue_number: issue.number,
+            labels: ['haiku 🐸']
+        });
+    } catch (error) {
+        console.error('Failed to add label:', error);
+    }
 }
