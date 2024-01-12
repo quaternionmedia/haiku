@@ -9,7 +9,7 @@ runs:
   using: composite
   steps:
     - name: 💾 Install dependencies
-      run: npm install syllable
+      run: npm install syllable @actions/core @actions/github
       shell: bash
     - name: 👺 Check for haiku
       run: node ./.github/actions/haiku/haiku.js
